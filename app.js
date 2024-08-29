@@ -19,13 +19,15 @@ app.get('/latest-news', async (req, res) => {
         // Find each news item and extract the necessary details
         $('.section_post_box').each((index, element) => {
             const title = $(element).find('.title a').text().trim();
+            const url = $(element).find('.title a').attr('href');
             const thumbnail = $(element).find('.thumbnail img').attr('data-lazy-src'); // Get lazy-loaded image
             const authorDate = $(element).find('.post_author_date').text().trim();
 
             // Push the extracted data to the news array if all elements are found
-            if (title && thumbnail && authorDate) {
+            if (title && url && thumbnail && authorDate) {
                 news.push({
                     title,
+                    url,
                     thumbnail,
                     authorDate
                 });
